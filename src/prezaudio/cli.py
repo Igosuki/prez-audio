@@ -80,7 +80,7 @@ def _slug(title: str) -> str:
 @click.option("--deck", "source", required=True, help="URL, .html/.pdf path, or image directory.")
 @click.option("--title", default=None)
 @click.option("--lang", default="fr", show_default=True)
-@click.option("--backend", type=click.Choice(["elevenlabs", "fake"]), default="elevenlabs",
+@click.option("--backend", type=click.Choice(["elevenlabs", "kokoro", "fake"]), default="elevenlabs",
               show_default=True)
 @click.option("--force", is_flag=True, help="Allow a non-empty existing directory.")
 def new(directory, source, title, lang, backend, force):

@@ -7,8 +7,11 @@ def get_backend(name: str) -> TTSBackend:
     if name == "fake":
         from prezaudio.tts.fake import FakeBackend
         return FakeBackend()
+    if name == "kokoro":
+        from prezaudio.tts.kokoro import KokoroBackend
+        return KokoroBackend()
     if name == "elevenlabs":
         from prezaudio.tts.elevenlabs import ElevenLabsClient, get_api_key
         return ElevenLabsClient(get_api_key())
     from prezaudio.project import PrezError
-    raise PrezError(f"unknown voice backend {name!r} (use elevenlabs or fake)")
+    raise PrezError(f"unknown voice backend {name!r} (use elevenlabs, kokoro or fake)")

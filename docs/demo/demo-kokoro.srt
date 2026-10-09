@@ -1,0 +1,119 @@
+1
+00:00:00,400 --> 00:00:01,957
+Bonjour à toutes et à tous.
+
+2
+00:00:02,207 --> 00:00:06,776
+Aujourd'hui, je vous présente prez-audio,
+un outil qui transforme une présentation
+
+3
+00:00:06,776 --> 00:00:07,711
+en vidéo narrée.
+
+4
+00:00:07,961 --> 00:00:12,036
+Vous gardez votre deck tel quel, et vous
+obtenez une vidéo avec une voix.
+
+5
+00:00:13,240 --> 00:00:14,861
+Tout se passe en quatre étapes.
+
+6
+00:00:15,111 --> 00:00:18,333
+D'abord, on fige le deck : chaque slide
+devient une image.
+
+7
+00:00:18,583 --> 00:00:21,420
+Ensuite, on écrit le discours, un texte
+par slide.
+
+8
+00:00:21,670 --> 00:00:23,803
+Puis une voix de synthèse lit chaque
+texte.
+
+9
+00:00:24,053 --> 00:00:27,680
+Enfin, le montage assemble les images et
+les voix en une vidéo.
+
+10
+00:00:28,880 --> 00:00:32,677
+Le principe essentiel : on corrige le
+discours, jamais la vidéo.
+
+11
+00:00:32,927 --> 00:00:37,407
+Chaque slide a une empreinte, calculée
+depuis son image, son texte et sa voix.
+
+12
+00:00:37,657 --> 00:00:41,845
+Si vous modifiez une seule slide, une
+seule voix est refaite, et un seul clip
+
+13
+00:00:41,845 --> 00:00:42,543
+est remonté.
+
+14
+00:00:42,793 --> 00:00:44,243
+Le reste est réutilisé.
+
+15
+00:00:45,443 --> 00:00:47,470
+Trois garde-fous protègent le processus.
+
+16
+00:00:47,720 --> 00:00:51,325
+Le deck ne peut lire aucun fichier en
+dehors de son propre dossier.
+
+17
+00:00:51,575 --> 00:00:55,562
+Pas de voix sans texte validé : si le
+discours change, il faut le valider à
+
+18
+00:00:55,562 --> 00:00:56,034
+nouveau.
+
+19
+00:00:56,284 --> 00:01:00,614
+Et pas de vidéo avec une voix périmée :
+seules les slides modifiées sont refaites.
+
+20
+00:01:01,814 --> 00:01:05,163
+Tout est un fichier : le deck, le
+discours, la configuration.
+
+21
+00:01:05,413 --> 00:01:08,208
+Avec les mêmes entrées, vous obtenez la
+même vidéo.
+
+22
+00:01:08,458 --> 00:01:11,146
+On ne retouche jamais la vidéo, on la
+reconstruit.
+
+23
+00:01:12,346 --> 00:01:13,946
+Pour finir, retenez une idée.
+
+24
+00:01:14,196 --> 00:01:15,924
+La vidéo n'est pas le livrable.
+
+25
+00:01:16,174 --> 00:01:17,753
+Le livrable, c'est la machine.
+
+26
+00:01:18,003 --> 00:01:19,496
+Merci de votre attention.
+

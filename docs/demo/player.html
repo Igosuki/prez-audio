@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Demo Kokoro</title><style>
+:root{--bg:#fff;--fg:#1d1d1f;--muted:#6b6b72;--card:#f4f4f6;--line:#d9d9de;--accent:#2a5bd7;--ok:#1a7f37;--bad:#b42318}
+@media (prefers-color-scheme:dark){:root{--bg:#141417;--fg:#ececf0;--muted:#9a9aa3;--card:#1e1e23;--line:#33333b;--accent:#7aa2ff;--ok:#4cc26b;--bad:#ff7b72}}
+*{box-sizing:border-box}body{margin:0;padding:16px;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+h1{font-size:1.4rem;margin:0 0 16px}.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin:0 auto 16px;max-width:1000px}
+.card img{width:100%;height:auto;border-radius:4px;display:block}.badge{display:inline-block;padding:0 8px;border-radius:99px;border:1px solid var(--line);font-size:.8rem;margin-right:4px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.muted{color:var(--muted)}pre{white-space:pre-wrap;font:inherit;margin:8px 0 0}
+audio{width:100%}code{font-size:.85rem}
+
+.layout{display:grid;gap:16px;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);max-width:1400px;margin:0 auto}
+@media (max-width:800px){.layout{grid-template-columns:1fr}}
+video{width:100%;background:#000;border-radius:8px}
+.side{display:flex;flex-direction:column;gap:12px;min-height:0}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;overflow:auto;position:relative;max-height:36vh}
+ol,ul{list-style:none;margin:0;padding:0}li{padding:4px 8px;border-radius:4px;cursor:pointer}
+li:hover{background:var(--line)}li.active{background:var(--accent);color:#fff}
+.speeds button{margin:2px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);cursor:pointer}
+.speeds button[aria-pressed=true]{background:var(--accent);color:#fff}
+</style></head><body><h1>Demo Kokoro</h1><div class="layout"><video id="v" controls preload="metadata" src="demo-kokoro.mp4"></video><div class="side"><div class="speeds" id="speeds"></div><h2>Chapters</h2><div class="panel"><ol id="chapters"></ol></div><h2>Transcript</h2><div class="panel"><ul id="transcript"></ul></div></div></div><script type="application/json" id="data">{"chapters": [{"n": 1, "title": "Une pr\u00e9sentation devient une vid\u00e9o narr\u00e9e", "start": 0.0, "end": 12.84}, {"n": 2, "title": "Quatre \u00e9tapes, une machine", "start": 12.84, "end": 28.48}, {"n": 3, "title": "Corrigez le discours, jamais la vid\u00e9o", "start": 28.48, "end": 45.043}, {"n": 4, "title": "Des contr\u00f4les avant de d\u00e9penser", "start": 45.043, "end": 61.414}, {"n": 5, "title": "Tout est un fichier", "start": 61.414, "end": 71.946}, {"n": 6, "title": "La machine est le livrable, pas la vid\u00e9o.", "start": 71.946, "end": 80.306}], "cues": [{"start": 0.4, "end": 1.957, "text": "Bonjour \u00e0 toutes et \u00e0 tous.", "slide": 1}, {"start": 2.207, "end": 6.776, "text": "Aujourd'hui, je vous pr\u00e9sente prez-audio,\nun outil qui transforme une pr\u00e9sentation", "slide": 1}, {"start": 6.776, "end": 7.711, "text": "en vid\u00e9o narr\u00e9e.", "slide": 1}, {"start": 7.961, "end": 12.036, "text": "Vous gardez votre deck tel quel, et vous\nobtenez une vid\u00e9o avec une voix.", "slide": 1}, {"start": 13.24, "end": 14.861, "text": "Tout se passe en quatre \u00e9tapes.", "slide": 2}, {"start": 15.111, "end": 18.333, "text": "D'abord, on fige le deck : chaque slide\ndevient une image.", "slide": 2}, {"start": 18.583, "end": 21.42, "text": "Ensuite, on \u00e9crit le discours, un texte\npar slide.", "slide": 2}, {"start": 21.67, "end": 23.803, "text": "Puis une voix de synth\u00e8se lit chaque\ntexte.", "slide": 2}, {"start": 24.053, "end": 27.68, "text": "Enfin, le montage assemble les images et\nles voix en une vid\u00e9o.", "slide": 2}, {"start": 28.88, "end": 32.677, "text": "Le principe essentiel : on corrige le\ndiscours, jamais la vid\u00e9o.", "slide": 3}, {"start": 32.927, "end": 37.407, "text": "Chaque slide a une empreinte, calcul\u00e9e\ndepuis son image, son texte et sa voix.", "slide": 3}, {"start": 37.657, "end": 41.845, "text": "Si vous modifiez une seule slide, une\nseule voix est refaite, et un seul clip", "slide": 3}, {"start": 41.845, "end": 42.543, "text": "est remont\u00e9.", "slide": 3}, {"start": 42.793, "end": 44.243, "text": "Le reste est r\u00e9utilis\u00e9.", "slide": 3}, {"start": 45.443, "end": 47.47, "text": "Trois garde-fous prot\u00e8gent le processus.", "slide": 4}, {"start": 47.72, "end": 51.325, "text": "Le deck ne peut lire aucun fichier en\ndehors de son propre dossier.", "slide": 4}, {"start": 51.575, "end": 55.562, "text": "Pas de voix sans texte valid\u00e9 : si le\ndiscours change, il faut le valider \u00e0", "slide": 4}, {"start": 55.562, "end": 56.034, "text": "nouveau.", "slide": 4}, {"start": 56.284, "end": 60.614, "text": "Et pas de vid\u00e9o avec une voix p\u00e9rim\u00e9e :\nseules les slides modifi\u00e9es sont refaites.", "slide": 4}, {"start": 61.814, "end": 65.163, "text": "Tout est un fichier : le deck, le\ndiscours, la configuration.", "slide": 5}, {"start": 65.413, "end": 68.208, "text": "Avec les m\u00eames entr\u00e9es, vous obtenez la\nm\u00eame vid\u00e9o.", "slide": 5}, {"start": 68.458, "end": 71.146, "text": "On ne retouche jamais la vid\u00e9o, on la\nreconstruit.", "slide": 5}, {"start": 72.346, "end": 73.946, "text": "Pour finir, retenez une id\u00e9e.", "slide": 6}, {"start": 74.196, "end": 75.924, "text": "La vid\u00e9o n'est pas le livrable.", "slide": 6}, {"start": 76.174, "end": 77.753, "text": "Le livrable, c'est la machine.", "slide": 6}, {"start": 78.003, "end": 79.496, "text": "Merci de votre attention.", "slide": 6}]}</script><script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const v=document.getElementById('v');
+const chapEl=document.getElementById('chapters'),trEl=document.getElementById('transcript'),spEl=document.getElementById('speeds');
+function seek(t){v.currentTime=t;v.play()}
+D.chapters.forEach((c,i)=>{const li=document.createElement('li');li.textContent=(i+1)+'. '+c.title;li.onclick=()=>seek(c.start);chapEl.appendChild(li)});
+D.cues.forEach(c=>{const li=document.createElement('li');li.textContent=c.text.replace(/\n/g,' ');li.onclick=()=>seek(c.start);trEl.appendChild(li)});
+[1,1.25,1.5,2,3,5,10].forEach(s=>{const b=document.createElement('button');b.textContent='\u00d7'+s;b.setAttribute('aria-pressed',s===1);
+b.onclick=()=>{v.playbackRate=s;[...spEl.children].forEach(x=>x.setAttribute('aria-pressed',x===b))};spEl.appendChild(b)});
+let curCue=-1,curChap=-1;
+function mark(list,idx,prev){if(idx===prev)return prev;if(prev>=0)list.children[prev].classList.remove('active');
+if(idx>=0){const el=list.children[idx];el.classList.add('active');const box=list.parentElement;
+if(el.offsetTop<box.scrollTop||el.offsetTop+el.offsetHeight>box.scrollTop+box.clientHeight)box.scrollTop=el.offsetTop-box.clientHeight/3}return idx}
+function tick(){const t=v.currentTime;
+curCue=mark(trEl,D.cues.findIndex(c=>t>=c.start&&t<c.end),curCue);
+curChap=mark(chapEl,D.chapters.findIndex(c=>t>=c.start&&t<c.end),curChap)}
+v.addEventListener('timeupdate',tick);v.addEventListener('seeked',tick);
+</script></body></html>

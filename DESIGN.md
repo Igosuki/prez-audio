@@ -57,7 +57,7 @@ width = 1920
 height = 1080
 
 [voice]
-backend = "elevenlabs"            # "elevenlabs" | "fake" (offline, for tests/demo)
+backend = "elevenlabs"            # "elevenlabs" | "kokoro" (local, free) | "fake" (offline, for tests/demo)
 voice_id = ""
 model_id = "eleven_multilingual_v2"
 stability = 0.5
@@ -107,7 +107,7 @@ slide is shown silently for `lead_in + tail + 2s`.
 ## CLI surface (`prez`, click-based, run from inside a project dir or with `-C <dir>`)
 
 ```
-prez new <dir> --deck <src> [--title T] [--lang fr] [--backend elevenlabs|fake]
+prez new <dir> --deck <src> [--title T] [--lang fr] [--backend elevenlabs|kokoro|fake]
                                          scaffold project, prez.toml, .gitignore, sources/
 prez freeze [--exclude 40-42]            deck → slides/*.png + manifest.json
 prez status [--json]                     table: slide, title, discours?, validated?, audio fresh?, clip fresh?
@@ -141,6 +141,7 @@ prez key set                             store ElevenLabs key in OS keyring
 | `guards.py` | `GuardError`, `require_validated`, `require_fresh_audio` |
 | `deck.py` | `freeze(source, out_dir, *, width, height, exclude, selector) -> list[SlideInfo]` |
 | `tts/base.py` | `TTSBackend` protocol: `synthesize(text, settings, *, previous_text, next_text, lang) -> TTSResult(audio_bytes mp3, alignment: list[WordTiming], duration)` |
+| `tts/kokoro.py` | local Kokoro-82M via `kokoro-onnx` (optional extra `kokoro`); int8 model + voices cached in `~/.cache/prez-audio/kokoro/`; synthesizes sentence by sentence so sentence boundaries in word timings are exact; `voice_id` = Kokoro voice (default `ff_siwis` for fr, `af_heart` otherwise); `speed` honored, stability/style ignored; audition varies speed |
 | `tts/elevenlabs.py` | `/v1/text-to-speech/{voice_id}/with-timestamps`, char alignment → word timings; STT `/v1/speech-to-text` |
 | `tts/fake.py` | offline: quiet tone via ffmpeg, ~0.35 s/word, evenly spread word timings |
 | `subtitles.py` | word timings + clip offsets → cues (≤ 2 lines × 42 chars, ≤ 6 s, sentence-aware) → SRT, VTT |

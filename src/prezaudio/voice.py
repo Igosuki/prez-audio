@@ -10,6 +10,7 @@ from prezaudio.tts import TTSBackend, get_backend
 CONTEXT_CHARS = 500
 AUDITION_CHARS = 600
 AUDITION_DEFAULTS = [(0.5, 0.0), (0.35, 0.3), (0.3, 0.5), (0.2, 0.7)]
+KOKORO_SPEEDS = (0.9, 1.0, 1.1, 1.2)
 
 
 def synth(project: Project, slides: list[int], *, force: bool = False,
@@ -58,6 +59,15 @@ def variant_grid(count: int) -> list[tuple[float, float]]:
             for k in range(count)]
 
 
+def speed_grid(count: int) -> list[float]:
+    lo, hi = KOKORO_SPEEDS[0], KOKORO_SPEEDS[-1]
+    if count == len(KOKORO_SPEEDS):
+        return list(KOKORO_SPEEDS)
+    if count == 1:
+        return [1.0]
+    return [round(lo + (hi - lo) * k / (count - 1), 3) for k in range(count)]
+
+
 def audition_text(project: Project, slide: int) -> str:
     text = project.tts_text(slide)
     if not text:
@@ -78,8 +88,12 @@ def audition(project: Project, slide: int, count: int = 4,
     text = audition_text(project, slide)
     project.audition_dir.mkdir(parents=True, exist_ok=True)
     variants = []
-    for k, (stability, style) in enumerate(variant_grid(count), 1):
-        s = dataclasses.replace(base, stability=stability, style=style)
+    if base.backend == "kokoro":
+        overrides = [{"speed": v} for v in speed_grid(count)]
+    else:
+        overrides = [{"stability": a, "style": b} for a, b in variant_grid(count)]
+    for k, override in enumerate(overrides, 1):
+        s = dataclasses.replace(base, **override)
         result = backend.synthesize(text, s, lang=project.lang)
         name = f"variant-{k}.mp3"
         write_bytes_atomic(project.audition_dir / name, result.audio_bytes)
@@ -96,7 +110,8 @@ def choose(project: Project, k: int) -> dict:
     match = next((v for v in variants if v["k"] == k), None)
     if match is None:
         raise PrezError(f"no variant {k} (have 1-{len(variants)})")
-    chosen = {key: match[key] for key in ("stability", "style")}
+    keys = ("speed",) if match.get("backend") == "kokoro" else ("stability", "style")
+    chosen = {key: match[key] for key in keys}
     for key, value in chosen.items():
         project.set_value("voice", key, value)
     project.save()

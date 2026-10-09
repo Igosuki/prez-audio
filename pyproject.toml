@@ -5,6 +5,9 @@ description = "Turn a slide deck into a narrated video"
 requires-python = ">=3.11"
 dependencies = ["click>=8.1", "httpx>=0.27", "tomlkit>=0.12", "playwright>=1.40", "keyring>=24"]
 
+[project.optional-dependencies]
+kokoro = ["kokoro-onnx>=0.4; python_version < '3.14'"]
+
 [project.scripts]
 prez = "prezaudio.cli:main"
 

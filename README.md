@@ -4,6 +4,8 @@ Turn a slide deck into a narrated video with a cloned voice. Claude Code writes 
 
 Inspired by a LinkedIn post describing the same machine: a talk's deck, narrated by a cloned ElevenLabs voice, produced by Claude Code with three skills, an engine and tests. This repository is an independent open-source reimplementation of that idea, not the original code.
 
+**Demo:** [docs/demo/demo-kokoro.mp4](docs/demo/demo-kokoro.mp4). The 6-slide deck in `examples/demo-deck/` was narrated by the local Kokoro voice and produced end to end by `prez`, with no manual editing. Subtitles are in [`.srt`](docs/demo/demo-kokoro.srt), and the player page is [`docs/demo/player.html`](docs/demo/player.html): download it next to the mp4.
+
 ## En bref
 
 `prez-audio` transforme une présentation (deck HTML, PDF ou images) en vidéo narrée avec ta voix clonée ElevenLabs. Trois skills Claude Code (`prez-nouveau`, `prez-discours`, `prez-production`) pilotent un moteur Python, `prez`. L'humain n'intervient qu'à quelques points : valider le plan, fournir la clé API, commenter le discours slide par slide sur une page claude.ai, choisir la voix à l'oreille parmi 4 versions de la slide 1, dire « continue ».
@@ -81,6 +83,17 @@ Then edit one sentence in `demo/discours/slide-03.md` and run `status`, `synth` 
 
 The fake backend produces a quiet tone at about 0.35 s per word. It exercises the whole pipeline, including fingerprints and partial rebuilds.
 
+### Local demo with a real voice (Kokoro, free, no API key)
+
+The `kokoro` backend runs the open Kokoro-82M model locally through ONNX Runtime (French voice `ff_siwis`, English `af_heart`). It needs no system packages. The first synth downloads about 120 MB (int8 model plus voices) to `~/.cache/prez-audio/kokoro/` (`$XDG_CACHE_HOME` is honoured).
+
+```
+uv sync --extra kokoro
+uv run prez new demo --deck examples/demo-deck/index.html --title "Demo" --lang fr --backend kokoro
+```
+
+Then follow the same steps as the offline demo. `prez voice set voice_id=<kokoro voice>` picks another voice; `prez audition` compares four speeds (0.9 to 1.2) instead of stability/style, and `prez voice choose K` writes the speed. Kokoro ignores stability, style and neighbouring-slide context.
+
 ### Real run with ElevenLabs
 
 1. Clone your voice in ElevenLabs and note its `voice_id`.
@@ -103,7 +116,7 @@ You can also run every step by hand with the `prez` commands below.
 ## Commands
 
 ```
-prez new <dir> --deck <src> [--title T] [--lang fr] [--backend elevenlabs|fake]
+prez new <dir> --deck <src> [--title T] [--lang fr] [--backend elevenlabs|kokoro|fake]
 prez freeze [--exclude 40-42]
 prez status [--json]
 prez discours init | text <sel>
@@ -175,7 +188,7 @@ Changing a voice parameter makes every slide stale, which is the intended behavi
 - Verification needs speech-to-text access on the ElevenLabs key; without it the check is skipped.
 - A full render of a long deck takes a long time. Keep the machine awake (`systemd-inhibit` on Linux, `caffeinate` on macOS).
 - The voice must be chosen by a person listening; there is no automatic quality judge.
-- Only ElevenLabs (plus the offline fake backend) is implemented.
+- Voice backends: ElevenLabs (cloned voices, speech-to-text verification), Kokoro (local, free, preset voices, no verification) and the offline fake backend. No other provider is implemented.
 
 ## License
 
