@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><style>
+body{margin:0}div{display:none;height:100vh}div.on{display:block}
+</style>
+<div class="on" style="background:#c33"><h1>K1</h1></div>
+<div style="background:#3c3"><h1>K2</h1></div>
+<div style="background:#33c"><h2>K3</h2></div>
+<script>
+let i = 0; const d = [...document.querySelectorAll('div')];
+addEventListener('keydown', e => {
+  if (e.key !== 'ArrowRight' || i >= d.length - 1) return;
+  d[i].classList.remove('on'); d[++i].classList.add('on');
+});
+</script>

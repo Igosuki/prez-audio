@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>prez-audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b1f3a;--blue:#1f5fd6;--blue-d:#143f94;--blue-l:#e8f0fe;--line:#b9cdf5;--mute:#5b6b85;--bg:#fff}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#0b1f3a;overflow:hidden}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.deck{position:relative;width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;background:var(--bg);overflow:hidden;font-size:calc(min(100vw,177.78vh)/100)}
+section.slide{position:absolute;inset:0;padding:7em 8em 6em;display:none;flex-direction:column;
+  background-image:linear-gradient(var(--blue-l) 1px,transparent 1px),linear-gradient(90deg,var(--blue-l) 1px,transparent 1px);
+  background-size:4em 4em;background-color:#fff}
+section.slide.active{display:flex}
+section.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1.1em;background:var(--blue)}
+.tag{font:500 1.5em "JetBrains Mono",monospace;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1em}
+h1{font-size:5.6em;font-weight:800;line-height:1.08;letter-spacing:-.02em;max-width:18em}
+h2{font-size:4em;font-weight:800;line-height:1.1;letter-spacing:-.01em;margin-bottom:.9em}
+.sub{font-size:2.4em;color:var(--mute);margin-top:1em;font-weight:400}
+.foot{position:absolute;left:6.15em;right:6.15em;bottom:1.85em;display:flex;justify-content:space-between;
+  font:500 1.3em "JetBrains Mono",monospace;color:var(--mute)}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:auto;margin-bottom:auto}
+.step{flex:1;background:#fff;border:.18em solid var(--blue);border-radius:.8em;padding:1.6em 1.4em;position:relative}
+.step b{display:block;font:500 1.4em "JetBrains Mono",monospace;color:var(--blue);margin-bottom:.6em}
+.step strong{display:block;font-size:2.3em;font-weight:800;margin-bottom:.4em}
+.step span{font-size:1.5em;color:var(--mute);line-height:1.35}
+.arrow{width:3.4em;align-self:center;height:.18em;background:var(--blue);position:relative;flex:none}
+.arrow::after{content:"";position:absolute;right:-.1em;top:-.5em;border-left:.9em solid var(--blue);border-top:.59em solid transparent;border-bottom:.59em solid transparent}
+.cols{display:flex;gap:3em;margin:auto 0}
+.card{flex:1;background:#fff;border:.18em solid var(--line);border-radius:.8em;padding:2em}
+.card.hot{border-color:var(--blue)}
+.card h3{font-size:2.2em;font-weight:800;margin-bottom:.6em}
+.card p,.card li{font-size:1.7em;line-height:1.45;color:var(--mute)}
+.card ul{padding-left:1.1em}
+code,.mono{font-family:"JetBrains Mono",monospace;color:var(--blue-d);background:var(--blue-l);padding:.05em .35em;border-radius:.3em;font-size:.92em}
+.big{font-size:4.6em;font-weight:800;line-height:1.2;max-width:22em}
+.big em{font-style:normal;color:var(--blue)}
+.hashes{display:flex;flex-direction:column;gap:.7em;margin-top:1.2em}
+.hash{display:flex;align-items:center;gap:1em;font:500 1.5em "JetBrains Mono",monospace}
+.hash i{font-style:normal;flex:none;width:7em;color:var(--ink)}
+.hash u{text-decoration:none;color:var(--blue);background:var(--blue-l);padding:.2em .6em;border-radius:.4em}
+.hash s{text-decoration:none;color:var(--mute)}
+.rail{display:flex;gap:1.5em;margin-top:auto;margin-bottom:auto;align-items:center}
+.node{background:var(--blue);color:#fff;border-radius:.8em;padding:1em 1.6em;font-size:2em;font-weight:600;text-align:center}
+.node.out{background:var(--ink)}
+.node.in{background:#fff;color:var(--blue);border:.15em solid var(--blue)}
+.rail .arrow{width:2.4em}
+</style>
+</head>
+<body>
+<div class="stage"><main class="deck">
+
+<section class="slide active">
+  <div class="tag">prez-audio</div>
+  <h1>Une présentation devient une vidéo narrée</h1>
+  <p class="sub">A presentation becomes a narrated video — reproducibly.</p>
+  <div class="foot"><span>deck &rarr; discours &rarr; voix &rarr; vidéo</span><span>01 / 06</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">Le pipeline</div>
+  <h2>Quatre étapes, une machine</h2>
+  <div class="flow">
+    <div class="step"><b>01</b><strong>Figer le deck</strong><span>Chaque slide devient une image 1920×1080.</span></div>
+    <div class="arrow"></div>
+    <div class="step"><b>02</b><strong>Le discours</strong><span>Un texte parlé par slide, écrit pour l'oreille.</span></div>
+    <div class="arrow"></div>
+    <div class="step"><b>03</b><strong>La voix</strong><span>Synthèse vocale, un clip audio par slide.</span></div>
+    <div class="arrow"></div>
+    <div class="step"><b>04</b><strong>Le montage</strong><span>Image + voix assemblées en vidéo et en lecteur web.</span></div>
+  </div>
+  <div class="foot"><span>freeze &middot; discours &middot; synth &middot; render</span><span>02 / 06</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">Principe</div>
+  <h2>Corrigez le discours, jamais la vidéo</h2>
+  <div class="cols">
+    <div class="card hot">
+      <h3>Une empreinte par slide</h3>
+      <p>Le texte, la voix et l'image sont hachés. Si l'empreinte ne change pas, rien n'est refait.</p>
+      <div class="hashes">
+        <div class="hash"><i>slide-01</i><u>a3f9…</u><s>inchangée</s></div>
+        <div class="hash"><i>slide-02</i><u>77c1…</u><s>inchangée</s></div>
+        <div class="hash"><i>slide-03</i><u>e04b…</u><s>texte modifié &rarr; refaite</s></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Seul ce qui change est refait</h3>
+      <ul><li>On édite <code>discours/slide-03.md</code></li><li>Une seule synthèse vocale</li><li>Un seul clip remonté</li></ul>
+    </div>
+  </div>
+  <div class="foot"><span>fingerprints</span><span>03 / 06</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">Garde-fous</div>
+  <h2>Des contrôles avant de dépenser</h2>
+  <div class="cols">
+    <div class="card"><h3>Le deck</h3><p>Lecture de fichiers limitée au dossier du deck. Le reste est bloqué et journalisé.</p></div>
+    <div class="card"><h3>Le discours</h3><p>Pas de voix sans texte validé : l'empreinte du texte doit correspondre à celle que vous avez validée.</p></div>
+    <div class="card"><h3>La vidéo</h3><p>Pas de montage avec une voix périmée. Seules les slides modifiées sont refaites.</p></div>
+  </div>
+  <div class="foot"><span>guardrails</span><span>04 / 06</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">Reproductibilité</div>
+  <h2>Tout est un fichier</h2>
+  <div class="rail">
+    <div class="node in">deck</div><div class="arrow"></div>
+    <div class="node in">discours</div><div class="arrow"></div>
+    <div class="node">machine</div><div class="arrow"></div>
+    <div class="node out">vidéo</div>
+  </div>
+  <p class="sub" style="margin-top:0">Mêmes entrées, même vidéo. La vidéo se reconstruit, elle ne se retouche pas.</p>
+  <div class="foot"><span>reproducible by construction</span><span>05 / 06</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">En résumé</div>
+  <h2 class="big" style="margin:auto 0">La machine est <em>le livrable</em>, pas la vidéo.</h2>
+  <p class="sub" style="margin-top:0">The machine is the deliverable. The video is just one of its outputs.</p>
+  <div class="foot"><span>prez-audio</span><span>06 / 06</span></div>
+</section>
+
+</main></div>
+<script>
+const slides = [...document.querySelectorAll('section.slide')];
+let i = 0;
+const show = n => {
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, j) => s.classList.toggle('active', j === i));
+};
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) show(i + 1);
+  else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) show(i - 1);
+  else if (e.key === 'Home') show(0);
+  else if (e.key === 'End') show(slides.length - 1);
+});
+addEventListener('click', () => show(i + 1));
+</script>
+</body>
+</html>

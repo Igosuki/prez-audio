@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><style>
+body{margin:0}section{display:none;height:100vh}section.on,section:has(section.on){display:block}
+section section{display:none}section section.on{display:block}
+</style>
+<div class="reveal"><div class="slides">
+<section class="slide" style="background:#c33"><h1>One</h1></section>
+<section class="slide"><section class="slide on" style="background:#3c3"><h2>Two</h2></section>
+<section class="slide" style="background:#33c"><h2>Two B</h2></section></section>
+</div></div>
+<script>
+window.Reveal = {
+  getSlides: () => [...document.querySelectorAll('.slides section')],
+  slide(h, v) {
+    document.querySelectorAll('.slides section').forEach(s => s.classList.remove('on'));
+    const top = document.querySelector('.slides').children[h];
+    (top.querySelector('section') ? top.children[v] : top).classList.add('on');
+  },
+};
+</script>

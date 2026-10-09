@@ -1,0 +1,22 @@
+[project]
+name = "prez-audio"
+version = "0.1.0"
+description = "Turn a slide deck into a narrated video"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1", "httpx>=0.27", "tomlkit>=0.12", "playwright>=1.40", "keyring>=24"]
+
+[project.scripts]
+prez = "prezaudio.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "respx>=0.21"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prezaudio"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
