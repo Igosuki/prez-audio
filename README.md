@@ -4,7 +4,7 @@ Turn a slide deck into a narrated video with a cloned voice. Claude Code writes 
 
 Inspired by a LinkedIn post describing the same machine: a talk's deck, narrated by a cloned ElevenLabs voice, produced by Claude Code with three skills, an engine and tests. This repository is an independent open-source reimplementation of that idea, not the original code.
 
-**Demo:** [docs/demo/demo-kokoro.mp4](docs/demo/demo-kokoro.mp4). The 6-slide deck in `examples/demo-deck/` was narrated by the local Kokoro voice and produced end to end by `prez`, with no manual editing. Subtitles are in [`.srt`](docs/demo/demo-kokoro.srt), and the player page is [`docs/demo/player.html`](docs/demo/player.html): download it next to the mp4.
+**Demo:** [watch it in the player](https://igosuki.github.io/prez-audio/) (chapters, highlighted sentence, speeds ×1 to ×10), or the raw [mp4](docs/demo/demo-kokoro.mp4). The 6-slide deck in `examples/demo-deck/` was narrated by the local Kokoro voice and produced end to end by `prez`, with no manual editing.
 
 ## En bref
 
